@@ -29,6 +29,37 @@ libraryDependencies ++= Seq(
 )
 ```
 
+Since Flyway 10, support for most databases has been split out of `flyway-core`
+into separate modules. Only H2 and SQLite are still bundled. For any other
+database, add the corresponding module to your dependencies. For example, for
+MySQL:
+
+```scala
+libraryDependencies ++= Seq(
+  "org.flywaydb" % "flyway-mysql" % "12.11.0"
+)
+```
+
+The module version should match the `flyway-core` version that flyway-play
+pulls in (see the table above).
+
+| Database                                     | Artifact                    |
+| -------------------------------------------- | --------------------------- |
+| MySQL / MariaDB / Aurora MySQL               | flyway-mysql                |
+| PostgreSQL / Aurora PostgreSQL / CockroachDB | flyway-database-postgresql  |
+| SQL Server / Azure Synapse                   | flyway-sqlserver            |
+| Oracle                                       | flyway-database-oracle      |
+| DB2                                          | flyway-database-db2         |
+| HSQLDB                                       | flyway-database-hsqldb      |
+| Derby                                        | flyway-database-derby       |
+| Snowflake                                    | flyway-database-snowflake   |
+| Redshift                                     | flyway-database-redshift    |
+| H2 / SQLite                                  | (bundled in flyway-core)    |
+
+For other databases, see the [Flyway database driver reference](https://documentation.red-gate.com/flyway/reference/database-driver-reference)
+and the `flyway-database-*` artifacts under
+[org.flywaydb on Maven Central](https://central.sonatype.com/namespace/org.flywaydb).
+
 Versions up to 9.1.0 were published by upstream as `"org.flywaydb" %% "flyway-play"`.
 
 conf/application.conf
