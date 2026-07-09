@@ -9,6 +9,7 @@ val flywayVersion = sys.env.getOrElse("FLYWAY_PLAY_FLYWAY_VERSION", defaultFlywa
 val scalikejdbcVersion = "4.3.5"
 
 ThisBuild / versionScheme := Some("early-semver")
+ThisBuild / version := flywayPlayVersion
 
 val scalatest = "org.scalatest" %% "scalatest" % "3.2.20" % "test"
 
