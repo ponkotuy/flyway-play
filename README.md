@@ -5,7 +5,7 @@
 Flyway module for Play 2.4 or later. It aims to be a substitute for play-evolutions.
 
 This is a fork of [playframework/flyway-play](https://github.com/playframework/flyway-play),
-published to Maven Central as `com.ponkotuy % flyway-play`. The main difference is Flyway 10 support.
+published to Maven Central as `com.ponkotuy % flyway-play`. The main difference is Flyway 10/11 support.
 
 ## <a class="anchor" name="features"></a>Features
 
@@ -17,13 +17,14 @@ published to Maven Central as `com.ponkotuy % flyway-play`. The main difference 
 
 | flyway-play version | play version | flyway version |
 | ------------------- | ------------ | -------------- |
+| 10.1.0              | 3.0.x        | 11.8.2         |
 | 10.0.0              | 3.0.x        | 10.11.1        |
 
 build.sbt
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.ponkotuy" %% "flyway-play" % "10.0.0"
+  "com.ponkotuy" %% "flyway-play" % "10.1.0"
 )
 ```
 

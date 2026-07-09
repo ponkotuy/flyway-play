@@ -1,9 +1,9 @@
-val flywayPlayVersion = "10.0.0"
+val flywayPlayVersion = "10.1.0"
 
 val scalaVersion_2_13 = "2.13.18"
 val scalaVersion_3 = "3.3.8"
 
-val defaultFlywayVersion = "10.11.1"
+val defaultFlywayVersion = "11.8.2"
 val flywayVersion = sys.env.getOrElse("FLYWAY_PLAY_FLYWAY_VERSION", defaultFlywayVersion)
 
 val scalikejdbcVersion = "4.3.5"

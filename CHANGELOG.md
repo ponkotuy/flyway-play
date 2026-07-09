@@ -1,5 +1,14 @@
 # Change Log
 
+## 10.1.0
+
+- Support Flyway 11.8.2
+
+## 10.0.0
+
+- Support Flyway 10.11.1 (#396)
+- Publish to Maven Central as `com.ponkotuy %% flyway-play` (fork of playframework/flyway-play)
+
 ## 9.1.0
 
 - Support Play 3.0.0

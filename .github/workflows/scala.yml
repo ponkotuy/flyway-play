@@ -14,8 +14,8 @@ jobs:
     strategy:
       matrix:
         flyway-version:
-          - "9.16.0"
-          - "10.11.1"
+          - "10.22.0"
+          - "11.8.2"
         java-version:
           - "17"
           - "21"
