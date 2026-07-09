@@ -68,7 +68,7 @@ class Flyways @Inject() (configuration: Configuration, environment: Environment)
       setSqlMigrationSuffixes(configuration, flyway)
       flyway.ignoreMigrationPatterns(configuration.ignoreMigrationPatterns: _*)
       configuration.validateOnMigrate.foreach(flyway.validateOnMigrate)
-      configuration.cleanOnValidationError.foreach(flyway.cleanOnValidationError)
+      setCleanOnValidationError(configuration, flyway)
       configuration.cleanDisabled.foreach(flyway.cleanDisabled)
       configuration.initOnMigrate.foreach(flyway.baselineOnMigrate)
       configuration.outOfOrder.foreach(flyway.outOfOrder)
@@ -125,6 +125,19 @@ class Flyways @Inject() (configuration: Configuration, environment: Environment)
         Logger("flyway").warn(s"Directory for migration files not found. $path")
         false
 
+    }
+  }
+
+  // cleanOnValidationError was removed from FluentConfiguration in Flyway 12.
+  // Invoke it reflectively so the setting keeps working with Flyway 11 and earlier.
+  private def setCleanOnValidationError(configuration: FlywayConfiguration, flyway: FluentConfiguration): Unit = {
+    configuration.cleanOnValidationError.foreach { value =>
+      try {
+        flyway.getClass.getMethod("cleanOnValidationError", java.lang.Boolean.TYPE).invoke(flyway, Boolean.box(value))
+      } catch {
+        case _: NoSuchMethodException =>
+          Logger("flyway").warn("cleanOnValidationError was removed in Flyway 12 and will be ignored.")
+      }
     }
   }
 

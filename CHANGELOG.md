@@ -1,5 +1,10 @@
 # Change Log
 
+## 10.2.0
+
+- Support Flyway 12.11.0
+- `cleanOnValidationError` is ignored (with a warning) when running with Flyway 12+, which removed the option. It still works with Flyway 11 and earlier.
+
 ## 10.1.0
 
 - Support Flyway 11.8.2
