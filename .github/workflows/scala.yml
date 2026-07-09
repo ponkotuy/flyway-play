@@ -27,5 +27,8 @@ jobs:
       with:
         distribution: temurin
         java-version: ${{ matrix.java-version }}
+        cache: sbt
+    - name: Set up sbt
+      uses: sbt/setup-sbt@v1
     - name: Run tests
       run: FLYWAY_PLAY_FLYWAY_VERSION=${{ matrix.flyway-version }} sbt +test
