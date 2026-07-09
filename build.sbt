@@ -1,4 +1,4 @@
-val flywayPlayVersion = "9.1.0"
+val flywayPlayVersion = "10.0.0"
 
 val scalaVersion_2_13 = "2.13.18"
 val scalaVersion_3 = "3.3.8"
@@ -8,19 +8,20 @@ val flywayVersion = sys.env.getOrElse("FLYWAY_PLAY_FLYWAY_VERSION", defaultFlywa
 
 val scalikejdbcVersion = "4.3.5"
 
+ThisBuild / versionScheme := Some("early-semver")
+
 val scalatest = "org.scalatest" %% "scalatest" % "3.2.20" % "test"
 
 lazy val commonSettings = Seq(
-  organization := "org.flywaydb",
+  organization := "com.ponkotuy",
   scalaVersion := scalaVersion_2_13,
   crossScalaVersions := Seq(scalaVersion_2_13, scalaVersion_3),
-  publishTo := {
-    val nexus = "https://oss.sonatype.org/"
-    if (version.value.trim.endsWith("SNAPSHOT"))
-      Some("snapshots" at nexus + "content/repositories/snapshots")
-    else
-      Some("releases" at nexus + "service/local/staging/deploy/maven2")
-  }
+  sonatypeCredentialHost := xerial.sbt.Sonatype.sonatypeCentralHost,
+  publishTo := sonatypePublishToBundle.value,
+  credentials ++= (for {
+    username <- sys.env.get("SONATYPE_USERNAME")
+    password <- sys.env.get("SONATYPE_PASSWORD")
+  } yield Credentials("Sonatype Nexus Repository Manager", "central.sonatype.com", username, password)).toSeq
 )
 
 lazy val `flyway-play` = project
@@ -76,18 +77,19 @@ lazy val playapp = project
 val publishingSettings = Seq(
   publishMavenStyle := true,
   Test / publishArtifact := false,
+  description := "Flyway module for Play Framework (fork of playframework/flyway-play)",
   pomExtra :=
-    <url>https://github.com/flyway/flyway-play</url>
+    <url>https://github.com/ponkotuy/flyway-play</url>
       <licenses>
         <license>
           <name>Apache License, Version 2.0</name>
-          <url>https://github.com/flyway/flyway-play/blob/master/LICENSE.txt</url>
+          <url>https://github.com/ponkotuy/flyway-play/blob/main/LICENSE.txt</url>
           <distribution>repo</distribution>
         </license>
       </licenses>
       <scm>
-        <url>git@github.com:flyway/flyway-play.git</url>
-        <connection>scm:git:git@github.com:flyway/flyway-play.git</connection>
+        <url>git@github.com:ponkotuy/flyway-play.git</url>
+        <connection>scm:git:git@github.com:ponkotuy/flyway-play.git</connection>
       </scm>
       <developers>
         <developer>
@@ -95,10 +97,16 @@ val publishingSettings = Seq(
           <name>Toshiyuki Takahashi</name>
           <url>https://tototoshi.github.io</url>
         </developer>
+        <developer>
+          <id>ponkotuy</id>
+          <name>ponkotuy</name>
+          <url>https://github.com/ponkotuy</url>
+        </developer>
       </developers>
 )
 
 val nonPublishingSettings = Seq(
+  publish / skip := true,
   publishArtifact := false,
   publish := {},
   publishLocal := {},
