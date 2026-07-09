@@ -1,8 +1,11 @@
 # flyway-play
 
-![Scala CI](https://github.com/flyway/flyway-play/workflows/Scala%20CI/badge.svg)
+![Scala CI](https://github.com/ponkotuy/flyway-play/actions/workflows/scala.yml/badge.svg)
 
 Flyway module for Play 2.4 or later. It aims to be a substitute for play-evolutions.
+
+This is a fork of [playframework/flyway-play](https://github.com/playframework/flyway-play),
+published to Maven Central as `com.ponkotuy % flyway-play`. The main difference is Flyway 10 support.
 
 ## <a class="anchor" name="features"></a>Features
 
@@ -14,21 +17,17 @@ Flyway module for Play 2.4 or later. It aims to be a substitute for play-evoluti
 
 | flyway-play version | play version | flyway version |
 | ------------------- | ------------ | -------------- |
-| 9.1.0               | 3.0.x        | 9.16.0         |
-| 9.0.0               | 3.0.x        | 9.16.0         |
-| 8.0.1               | 2.9.x        | 9.16.0         |
-| 7.38.0              | 2.8.x        | 9.16.0         |
-| 7.21.0              | 2.8.x        | 8.5.0          |
-| 7.14.0              | 2.8.x        | 7.14.0         |
-| 6.5.0               | 2.8.x        | 6.5.7          |
+| 10.0.0              | 3.0.x        | 10.11.1        |
 
 build.sbt
 
 ```scala
 libraryDependencies ++= Seq(
-  "org.flywaydb" %% "flyway-play" % "9.1.0"
+  "com.ponkotuy" %% "flyway-play" % "10.0.0"
 )
 ```
+
+Versions up to 9.1.0 were published by upstream as `"org.flywaydb" %% "flyway-play"`.
 
 conf/application.conf
 
@@ -38,13 +37,9 @@ play.modules.enabled += "org.flywaydb.play.PlayModule"
 
 ## Maintenance
 
-This repository is a community project and not officially maintained by the Flyway Team at Redgate.
-This project is looked after only by the open source community. Community Maintainers are people who have agreed to be contacted with queries for support and maintenance.
-Community Maintainers:
-
-- [@tototoshi](https://github.com/tototoshi)
-
-If you would like to be named as a Community Maintainer, let us know via Twitter: https://twitter.com/flywaydb.
+This fork is maintained by [@ponkotuy](https://github.com/ponkotuy).
+The upstream project [playframework/flyway-play](https://github.com/playframework/flyway-play) is a community project
+maintained by [@tototoshi](https://github.com/tototoshi), and is not officially maintained by the Flyway Team at Redgate.
 
 ## <a class="anchor" name="getting-started"></a>Getting Started
 
